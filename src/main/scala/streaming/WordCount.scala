@@ -40,5 +40,6 @@ object WordCount {
       */
     ssc.start()
     ssc.awaitTermination()
+    ssc.stop()
   }
 }
