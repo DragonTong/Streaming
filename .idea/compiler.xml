@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="streaming" />
+        <module name="spark.streaming.pro" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="streaming" target="1.5" />
+      <module name="spark.streaming.pro" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
