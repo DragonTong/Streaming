@@ -1,5 +1,6 @@
 package streaming
 
+import com.typesafe.config.ConfigFactory
 import org.apache.spark.SparkConf
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 
@@ -42,11 +43,12 @@ object SourceHdfs {
     */
   def createContext(): StreamingContext ={
 
-    val conf = new SparkConf()
-      .setAppName("HDFSInputData")
-      .setMaster("spark://master:7077")
+    implicit val conf = ConfigFactory.load()
+    val sparkConf = new SparkConf()
+      .setAppName(conf.getString("spark.appName"))
+      .setMaster(conf.getString("spark.master"))
 
-    val ssc = new StreamingContext(conf, Seconds(10))
+    val ssc = new StreamingContext(sparkConf, Seconds(10))
     ssc.checkpoint(checkpointDirectory)
     ssc
   }
