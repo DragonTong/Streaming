@@ -22,9 +22,9 @@ object sourceFlume {
     val IntervalBatch = Milliseconds(2000)
     val ssc = new StreamingContext(sparkConf, IntervalBatch)
 
-    val flumeStream = FlumeUtils.createStream(ssc, "local", 9999)
+    val flumeStream = FlumeUtils.createPollingStream(ssc, "192.168.0.156", 4545)
 
-    flumeStream.count().map((_,1)).reduceByKey(_ + _).print()
+    flumeStream.map(e => new String(e.event.getBody.array())).print()
 
     ssc.start()
     ssc.awaitTermination()
